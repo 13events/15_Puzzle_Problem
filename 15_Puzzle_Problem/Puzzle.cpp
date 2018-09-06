@@ -47,14 +47,30 @@ void Puzzle::moveBlank(Direction direction)
 {
 	Position2D currentPos = gapPos;
 	Position2D targetPos;
+	int tempValue;
 
+	//version - 1
 	switch (direction) {
 	case UP:
 		//check if we are at top edge.
+		if (currentPos.getX() == 0) {
+			std::cout << "We are already at the top edge.";
+			return;
+		}
+		
 		//determine index of row above, same column
+		targetPos.setNewPosition(currentPos.getX() - 1, currentPos.getY());
 		//get value from one row above, same column
+		tempValue = board[targetPos.getX()][targetPos.getY()];
 		//swap value from gapPos with index from target position
+		board[gapPos.getX()][gapPos.getY()] = tempValue;
+		board[targetPos.getX()][targetPos.getY()] = 0;
 		//update gapPosition	
+		gapPos = targetPos;
+
+		std::cout << "\n\n";
+		this->printPuzzle();
+		
 		break;
 	case LEFT:
 		//check if we are at left edge.
