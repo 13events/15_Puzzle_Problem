@@ -7,7 +7,15 @@
 //fill in the board 
 Puzzle::Puzzle()
 {
+	//seed random number generator
+std:srand(time(0));
 
+	//shuffle numbers array
+	std::random_shuffle(&numbers[0], &numbers[14]);
+
+	int numbersIndex = 0;
+	
+	
 	int count = 1;
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < columns; j++) {
@@ -15,8 +23,8 @@ Puzzle::Puzzle()
 					board[i][j] = 0;
 				}
 				else {
-					board[i][j] = count;
-					count++;
+					board[i][j] = numbers[numbersIndex];
+					numbersIndex++;
 				}
 		}
 	}
