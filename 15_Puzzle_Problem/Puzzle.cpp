@@ -8,7 +8,7 @@
 Puzzle::Puzzle()
 {
 	//seed random number generator
-std:srand(time(0));
+	std::srand(time(0));
 
 	//shuffle numbers array
 	std::random_shuffle(&numbers[0], &numbers[14]);
@@ -78,8 +78,8 @@ void Puzzle::moveBlank(Direction direction)
 
 		std::cout << "\n\n";
 		this->printPuzzle();
-		
 		break;
+
 	case LEFT:
 		//check if we are at left edge.
 		//determine index of column to left, same row
