@@ -48,9 +48,20 @@ void Puzzle::moveBlank(Direction direction)
 
 	switch (direction) {
 	case UP:
-		//check if we are at edge
-
-
+		//check if we are at edge.
+		//move up one row, keep same column.
+		break;
+	case LEFT:
+		//check if we are at left edge.
+		//move left one column, keep same row.
+		break;
+	case RIGHT:
+		//check if we are at right edge.
+		//move right one column, keep same row.
+		break;
+	case DOWN:
+		//check if we are at bottom edge.
+		//move down one row, keep column same.
 
 	}
 }
