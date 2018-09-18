@@ -46,6 +46,7 @@ void Puzzle::printPuzzle()
 	}
 }
 
+//TODO: Change to use vector.swap() for swapping around tiles on board
 //move the blank space in a direction while also switching the position of the values and the blank
 void Puzzle::moveBlank(Direction direction)
 {

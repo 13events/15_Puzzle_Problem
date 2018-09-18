@@ -14,11 +14,14 @@ private:
 	
 	Position2D gapPos = Position2D(3, 3);	//gap position on board
 	char gapSymbol = 219;	//ASCII value to use for gap symbol
+
+	//TODO: Change out for std::vector
 	int board[rows][columns];	//an array representing the board, we use 0 to represent the gap in the array
+	//TODO: create a vector representing goal state
 public:
 	Puzzle();	//default constructor
 	void printPuzzle();	//prints state of puzzle
-	void moveBlank(Direction direction);
+	void moveBlank(Direction direction);	//TODO: Change to use vector.swap()
 	~Puzzle();	//deconstructor
 };
 
