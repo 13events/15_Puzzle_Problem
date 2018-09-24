@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <string.h>
-
+#include <queue>
 
 int row[] = { 1,0,-1,0 };
 int col[] = { 0,-1,0,1 };
@@ -119,4 +119,79 @@ int calculateCost(std::vector<std::vector<int>> initial, std::vector<std::vector
 		}
 	}
 	return count;
+}
+
+//check if (x,y) is a valid matrix location
+int isSafe(int x, int y, Node* node) {
+	return (x >= 0 && x < node->rows && y >= 0 && y < node->cols);
+}
+
+//print out path form root node to destination node
+void printPath(Node* root) {
+	if (root == NULL) {	//nothing here
+		return;
+	}
+	printPath(root->parent);
+	printMatrix(root->matrix, root->rows, root->cols);
+	
+	std::cout << "\n";
+}
+
+//object used to compate, so we can sort them in the heap
+struct comp {
+	bool operator()(const Node* lhs, const Node* rhs) const {
+		return(lhs->cost + lhs->level) > (rhs->cost + rhs->level);
+	}
+};
+
+//function to solve an algorithm using branch and bound. x and y
+//are the blank tile coordinate in initial state
+void solve(std::vector<std::vector<int>> initial, int rows, int cols,
+	int x, int y, std::vector<std::vector<int>> final) {
+
+	//create priority queue to store live nodes of tree
+	std::priority_queue<Node*, std::vector<Node*>, comp> pq;
+
+	//create a root node and calculate its cost
+	Node* root = newNode(initial, rows, cols, x, y, x, y, 0, NULL);
+	root->cost = calculateCost(initial, final);
+
+	//add root to list of live nodes
+	pq.push(root);
+
+	//find a live node with least cost,
+	//add its children to list of live nodes and
+	//finally delete it from the list
+	while (!pq.empty()) {
+
+		//find a live node with least estimated cost 
+		Node* min = pq.top();
+
+		//delete the node from list of live nodes
+		pq.pop();
+
+		//if min is an answer node
+		if (min->cost == 0) {
+			//print the path from root to destination
+			printPath(min);
+			return;
+		}
+
+		//for each child of min, max 4 children for a node
+		for (int i = 0; i < 4; i++) {
+			if (isSafe(min->x + row[i], min->y + col[i], min)) {
+
+				//create a child node and calculate its cost
+				Node* child = newNode(min->matrix, min->rows, min->cols, min->x,
+					min->y, min->x + row[i],
+					min->y + col[i],
+					min->level + 1, min);
+
+				child->cost = calculateCost(child->matrix, final);
+
+				//add child to list of live nodes
+				pq.push(child);
+			}
+		}
+	}
 }
