@@ -7,7 +7,5 @@ changes to the code and README during the duration of the course.
 
 ## Phase 1
 The first phase of this project aim to setup the 15 puzzle problem that displays a grid of numbers with a blank space. 
-The grid must be populated by a random order of numbers. The gap must also be placed in a random location. The 
-program must be able to create, randomize and more numberes tiles.
-##### Optional
-Implement functionality and described above and create a driver program that takes in input from the user to move the gap around. 
+The grid must then be randomly shuffled using only valid moves and display the shuffled board. The AI logic must be able to solve the puzzle and display the solved puzzle.
+
